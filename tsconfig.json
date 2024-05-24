@@ -4,6 +4,22 @@
   "compilerOptions": {
     "lib": ["dom"],
     "sourceMap": true,
+    "jsx": "preserve",
+
+    // https://github.com/infernojs/inferno-typescript-example/blob/master/tsconfig.json
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*",
+    "node_modules/inferno/dist/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

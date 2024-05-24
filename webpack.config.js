@@ -1,16 +1,27 @@
-const path = require('path');
+import url from 'url'
+import infernoTsPlugin from 'ts-plugin-inferno';
 
-module.exports = {
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+export default {
     mode: 'development',
-    entry: './src/calendar.ts',
+    entry: './src/calendar.tsx',
     devtool: 'inline-source-map',
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
+                test: /\.ts$/,
+                loader: 'ts-loader'
+            },
+            {
+                test: /\.tsx$/,
+                loader: 'ts-loader',
+                options: {
+                    getCustomTransformers: () => ({
+                        after: [infernoTsPlugin.default()],
+                    }),
+                },
+            },
         ],
     },
     resolve: {
@@ -18,6 +29,6 @@ module.exports = {
     },
     output: {
         filename: 'calendar.js',
-        path: path.resolve(__dirname, 'htdocs'),
+        path: __dirname + 'htdocs',
     },
 }

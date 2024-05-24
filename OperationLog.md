@@ -132,5 +132,31 @@ https://www.infernojs.org/docs/guides/getting-started
 
 ```
 $ npm install --save inferno
+$ npm install --save-dev babel-plugin-inferno
 ```
+
+https://github.com/infernojs/inferno-typescript-example
+
+
+
+`typescript`は、dependendiesじゃなくて、devDependenciesだった。
+
+
+
+tslintは終わってた。
+
+https://github.com/palantir/tslint/issues/4534
+
+
+
+```
+import path from 'path';
+^^^^^^
+
+SyntaxError: Cannot use import statemant outside a module.
+```
+
+
+
+https://stackoverflow.com/questions/41553291/can-you-import-nodes-path-module-using-import-path-from-path
 
