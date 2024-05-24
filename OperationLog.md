@@ -72,7 +72,7 @@ http-serverが止められない。
 
 
 
-ターミナルから、`npm run start`とすると、http-serverが立ち上がるけど、IntelliJから、起動すると、http-serverが立ち上がらない。（←これは後回し。)
+ターミナルから、`npm run start`とすると、http-serverが立ち上がるけど、IntelliJから、起動すると、http-serverが立ち上がらない。（←これは後回し。TODO)
 
 
 
