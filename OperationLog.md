@@ -197,3 +197,119 @@ https://nodejs.org/docs/latest-v15.x/api/url.html#url_url_fileurltopath_url
 
 わざわざ、CommonJSの`__dirname`に名前を寄せなくてもいいか。
 
+
+
+#### ESLint
+
+https://eslint.org/docs/latest/use/getting-started
+
+```
+$ npm install --save-dev eslint
+$ npm init @eslint/config@latest
+```
+
+
+
+`npm init`中のwarning
+
+```
+npm WARN using --force Recommended protections disabled.
+npm WARN ERESOLVE overriding peer dependency
+npm WARN While resolving: eslint-plugin-react@7.34.1
+npm WARN Found: eslint@9.3.0
+npm WARN node_modules/eslint
+npm WARN   dev eslint@"9.x" from the root project
+npm WARN   1 more (@eslint-community/eslint-utils)
+npm WARN
+npm WARN Could not resolve dependency:
+npm WARN peer eslint@"^3 || ^4 || ^5 || ^6 || ^7 || ^8" from eslint-plugin-react@7.34.1
+npm WARN node_modules/eslint-plugin-react
+npm WARN   dev eslint-plugin-react@"*" from the root project
+npm WARN
+npm WARN Conflicting peer dependency: eslint@8.57.0
+npm WARN node_modules/eslint
+npm WARN   peer eslint@"^3 || ^4 || ^5 || ^6 || ^7 || ^8" from eslint-plugin-react@7.34.1
+npm WARN   node_modules/eslint-plugin-react
+npm WARN     dev eslint-plugin-react@"*" from the root project
+npm WARN ERESOLVE overriding peer dependency
+npm WARN ERESOLVE overriding peer dependency
+npm WARN ERESOLVE overriding peer dependency
+npm WARN ERESOLVE overriding peer dependency
+npm WARN While resolving: typescript-eslint@7.10.0
+npm WARN Found: eslint@9.3.0
+npm WARN node_modules/eslint
+npm WARN   dev eslint@"9.x" from the root project
+npm WARN   1 more (@eslint-community/eslint-utils)
+npm WARN
+npm WARN Could not resolve dependency:
+npm WARN peer eslint@"^8.56.0" from typescript-eslint@7.10.0
+npm WARN node_modules/typescript-eslint
+npm WARN   dev typescript-eslint@"*" from the root project
+npm WARN
+npm WARN Conflicting peer dependency: eslint@8.57.0
+npm WARN node_modules/eslint
+npm WARN   peer eslint@"^8.56.0" from typescript-eslint@7.10.0
+npm WARN   node_modules/typescript-eslint
+npm WARN     dev typescript-eslint@"*" from the root project
+npm WARN ERESOLVE overriding peer dependency
+```
+
+
+
+とりあえず、実行
+
+```
+$ npx eslint src/
+Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
+
+/home/stone/workspace/calendar/ts_inferno/src/calendar.tsx
+  3:8  error  'React' must be in scope when using JSX  react/react-in-jsx-scope
+
+✖ 1 problem (1 error, 0 warnings)
+```
+
+
+
+https://ja.legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
+
+> eslint-plugin-reactを使用している場合、`react/jsx-uses-react` と `react/react-in-jsx-scope` のルールは不要になりますので、無効にするか削除することができます。
+
+
+
+何も考えずにeslint v9をインストールしたけど、eslint-plugin-infernoがeslint v8までにしか対応してない。
+
+インストールし直し。
+
+
+
+```
+## eslint v8をインストール
+$ npm install --save-dev eslint@8
+
+## 初期化
+$ npm init @eslint/config
+Need to install the following packages:
+@eslint/create-config@1.1.1
+Ok to proceed? (y) y
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · none
+✔ Does your project use TypeScript? · typescript
+✔ Where does your code run? · browser
+The config that you've selected requires the following dependencies:
+
+eslint@9.x, globals, @eslint/js, typescript-eslint
+✔ Would you like to install them now? · No / Yes
+Successfully created /home/stone/workspace/calendar/ts_inferno/node_modules/eslint.config.js file.
+You will need to install the dependencies yourself.
+
+## 依存パッケージをインストール
+$ npm install --save-dev globals @eslint/js typescript-eslint
+
+## infernoプラグインをインストール
+ $ npm install --save-dev eslint-plugin-inferno
+```
+
+
+
+> This config system is feature complete but not enabled by default. To opt-in, place an `eslint.config.js` file in the root of your project or set the `ESLINT_USE_FLAT_CONFIG` environment variable to `true`.
