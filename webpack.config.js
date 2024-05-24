@@ -1,7 +1,7 @@
 import url from 'url'
 import infernoTsPlugin from 'ts-plugin-inferno';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const dir_name = url.fileURLToPath(new URL('.', import.meta.url));
 
 export default {
     mode: 'development',
@@ -29,6 +29,6 @@ export default {
     },
     output: {
         filename: 'calendar.js',
-        path: __dirname + 'htdocs',
+        path: dir_name + 'htdocs',
     },
 }

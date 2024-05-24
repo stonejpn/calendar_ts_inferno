@@ -160,3 +160,40 @@ SyntaxError: Cannot use import statemant outside a module.
 
 https://stackoverflow.com/questions/41553291/can-you-import-nodes-path-module-using-import-path-from-path
 
+
+
+`npm run build`を通すまで。
+
+
+
+`import ～`は、package.jsonで、`type: "module"`の指定が必要。
+
+https://webpack.js.org/guides/ecma-script-modules/#flagging-modules-as-esm
+
+typeには、`module`と`commonjs`があり、`commonjs`の場合、`require`で外部ファイルを読み込む。
+
+> CommonJs Syntax is not available: `require`, `module`, `exports`, `__filename`, `__dirname`.
+
+
+
+__dirnameをエミュレートするスクリプト
+
+```
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+```
+
+https://nodejs.org/docs/latest-v15.x/api/esm.html#esm_import_meta_url
+
+> ##### `import.meta.url`
+>
+> -  The absolute `file:` URL of the module.
+
+https://nodejs.org/docs/latest-v15.x/api/url.html#url_url_fileurltopath_url
+
+> - `url` \<URL> | \<String> The file URL string or URL object to convert to a path.
+> - Returns:  \<string> The fully-resolved platform-specific Node.js file path.
+
+
+
+わざわざ、CommonJSの`__dirname`に名前を寄せなくてもいいか。
+
