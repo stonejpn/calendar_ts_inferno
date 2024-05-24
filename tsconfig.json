@@ -1,0 +1,8 @@
+{
+  // https://www.npmjs.com/package/@tsconfig/node20
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["dom"],
+  },
+  "include": ["src/**/*"]
+}
