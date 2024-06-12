@@ -122,6 +122,39 @@ https://www.npmjs.com/package/@tsconfig/node20
 
 
 
+以前使っていたtsconfig.json
+
+```
+{
+  "compilerOptions": {
+    "pretty": true,
+    "target": "esnext",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "types": [
+      "inferno"
+    ],
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "baseUrl": "./src",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "node_modules/inferno/dist/index.d.ts"
+  ]
+}
+```
+
 
 
 #### Inferno
@@ -313,3 +346,59 @@ $ npm install --save-dev globals @eslint/js typescript-eslint
 
 
 > This config system is feature complete but not enabled by default. To opt-in, place an `eslint.config.js` file in the root of your project or set the `ESLINT_USE_FLAT_CONFIG` environment variable to `true`.
+
+
+
+#### テストフレームワーク
+
+以前は、[chai](https://www.npmjs.com/package/chai)、[mocha](https://www.npmjs.com/package/mocha)を触っていたけど、そんな本格的でもない。
+
+メインストリームは、[jest](https://www.npmjs.com/package/jest)かな？
+
+Weekly Downloadは、chai 105万、mocha 75万、jest 225万。
+
+「以前から使っていたもの」という縛りからは外れるが、jestを採用する。
+
+IntelliJもデフォルトでjestに対応してるみたいだし。
+
+
+
+https://jestjs.io/docs/getting-started
+
+
+
+インストールは、実際にテストを書く段階になったときに。
+
+
+
+#### SASS
+
+```json
+{
+        mode: 'development',
+        entry: './src/calendar.sass',
+        module: {
+            rules: [
+                {
+                    test: /\.sass/,
+                    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                },
+            ]
+        },
+        plugins: [
+            new MiniCssExtractPlugin({filename: 'calendar.css'}),
+        ],
+        output: {
+            filename: 'calendar_sass.js',
+            path: dir_name + 'htdocs'
+        },
+    },
+```
+
+そういえば、一緒に.jsが出力されるんだった。
+
+https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
+
+.jsファイルを削除するプラグイン
+
+https://www.npmjs.com/package/webpack-fix-style-only-entries

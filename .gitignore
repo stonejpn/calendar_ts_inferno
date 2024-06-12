@@ -1,3 +1,4 @@
 /node_modules/
 /.work/
 /htdocs/*.js
+/htdocs/*.css

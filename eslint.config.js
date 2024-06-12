@@ -12,8 +12,8 @@ export default [
         files: ['src/**/*.tsx', "src/**/*.ts"],
         rules: {
             ...js.configs.recommended.rules,
-            "react/jsx-uses-react": "off",
-            "react/react-in-jsx-scope": "off",
+            // "react/jsx-uses-react": "off",
+            // "react/react-in-jsx-scope": "off",
         }
     },
 ];

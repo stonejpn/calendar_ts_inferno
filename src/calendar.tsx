@@ -1,3 +1,5 @@
 import { render } from 'inferno';
+import CalendarContainer from './components/calendar_container';
 
-render(<div>Hello world from calendar.tsx</div>, document.getElementById('app-root'));
+
+render(<CalendarContainer location={window.location} history={window.history}/>, document.getElementById('app-root'));
