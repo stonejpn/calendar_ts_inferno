@@ -295,7 +295,7 @@ npm WARN ERESOLVE overriding peer dependency
 $ npx eslint src/
 Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
 
-/home/stone/workspace/calendar/ts_inferno/src/calendar.tsx
+/home/stone/workspace/calendar/ts_inferno/src/calendar_app.tsx
   3:8  error  'React' must be in scope when using JSX  react/react-in-jsx-scope
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -402,3 +402,42 @@ https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
 .jsファイルを削除するプラグイン
 
 https://www.npmjs.com/package/webpack-fix-style-only-entries
+
+
+
+### 実装メモ
+
+#### イベント
+
+例えば、下位コンポーネントからコールバックして欲しいとき、
+
+```jsx
+<Switcher weekStartDate={this.state.weekStartDate} onChanged={this.weekStartDateChanged}/>
+```
+
+と、関数をそのまま指定すると、`'this' is not object`みたいなエラーになる。
+
+これは、thisのスコープの話なので、`{this.weekStartDateChanged.bind(this)}`と書けば、エラーは解消できる。
+
+
+
+けど、Inferno的には`linkEvent`というヘルパーを使うのが作法みたい
+
+https://www.infernojs.org/docs/guides/event-handling
+
+
+
+```
+linkEvent<string, Event>
+```
+
+なんだけど。。。？？？
+
+
+
+#### そもそもInfernojs
+
+スピード面で[solidjs](https://www.solidjs.com/)に抜かれてる。
+
+今後、新しいプロジェクトで採用するメリットが無くなっちゃった。
+

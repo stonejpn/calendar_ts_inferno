@@ -1,8 +1,9 @@
 import { Component } from "inferno";
 import Navigator from "./navigator";
 import Switcher from './switcher';
+import Calendar from "./calendar";
 
-interface ICalendarProps {
+type CalendarAppProps = {
   location: Location
   history: History
 }
@@ -27,10 +28,10 @@ type CalendarContainerState = {
 // eslint-disable-next-line no-unused-vars
 export type WeekStartDateChangedCallback = (weekStartDate: string) => void;
 
-export default class CalendarContainer extends Component<ICalendarProps> {
+export default class CalendarContainer extends Component<CalendarAppProps> {
   state: CalendarContainerState;
 
-  constructor(props: ICalendarProps) {
+  constructor(props: CalendarAppProps) {
     super(props);
 
     const today = new Date();
@@ -45,15 +46,26 @@ export default class CalendarContainer extends Component<ICalendarProps> {
 
   weekStartDateChanged(weekStartDate :string) {
     this.setState({weekStartDate});
-    console.log('weekStartDateChanged: ' + weekStartDate);
   }
 
-  render() {
+  // @ts-expect-error TS6133: 'props' is declared but its value is never read.
+  render(props: CalendarAppProps, state: CalendarContainerState) {
+    let view_type_class :string = 'calendar-container';
+    if (state.viewType === ViewType.Month) {
+      view_type_class += ' calendar-month'
+    } else if (state.viewType === ViewType.Year) {
+      view_type_class += ' calendar-year'
+    }
+
     return (
-      <div className="calendar-container">
-        <h1 className="title">{this.state.year}年 {this.state.month}月</h1>
-        <Navigator year={this.state.year} month={this.state.month} viewType={this.state.viewType} />
-        <Switcher weekStartDate={this.state.weekStartDate} onChanged={this.weekStartDateChanged.bind(this)}/>
+      <div className={view_type_class}>
+        <h1 className="title">{state.year}年 {state.month}月</h1>
+        <Navigator year={state.year} month={state.month} viewType={state.viewType} />
+        <Switcher
+          weekStartDate={state.weekStartDate}
+          onChanged={this.weekStartDateChanged.bind(this)}
+        />
+        <Calendar {...state} />
       </div>
     );
   }

@@ -7,7 +7,7 @@ const dir_name = url.fileURLToPath(new URL('.', import.meta.url));
 export default [
     {
         mode: 'development',
-        entry: './src/calendar.tsx',
+        entry: './src/calendar_app.tsx',
         devtool: 'inline-source-map',
         module: {
             rules: [

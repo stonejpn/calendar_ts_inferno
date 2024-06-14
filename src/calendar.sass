@@ -1,2 +1,69 @@
 body
   line-height: 135%
+
+.calendar-container
+  width: 90%
+  min-width: 800px
+  margin-left: 5%
+
+  .title
+    text-align: center
+
+  .navigator
+    display: flex
+    margin-bottom: 1rem
+
+    div
+      display: inline-block
+      flex: 1 1 0
+
+    .prev
+      text-align: left
+
+    .curr
+      text-align: center
+
+    .next
+      text-align: right
+
+  .switcher
+    text-align: left
+
+    label
+      display: inline-block
+
+    label:first-child
+      margin-right: 1rem
+
+  .calendar
+    margin-top: 1rem
+
+    .header
+      display: flex
+
+      div
+        display: inline-block
+        flex: 1 1 0
+        text-align: center
+        border-left: 1px #BBBBBB solid
+        border-top: 1px #BBBBBB solid
+        border-bottom: 1px #BBBBBB solid
+        padding: 0.4rem
+
+      div:last-child
+        border-right: 1px #BBBBBB solid
+
+      .sunday
+        background-color: #FFEEEE
+
+      .saturday
+        background-color: #EEEEFF
+
+.calendar-month
+  .switcher
+    width: 90%
+    margin-left: 5%
+
+  .calendar
+    width: 90%
+    margin-left: 5%
