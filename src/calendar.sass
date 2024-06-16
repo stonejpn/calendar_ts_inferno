@@ -40,6 +40,7 @@ body
 
     .header
       display: flex
+      margin-bottom: 0.5rem
 
       div
         display: inline-block
@@ -59,6 +60,33 @@ body
       .saturday
         background-color: #EEEEFF
 
+    .calendar-body
+
+      .week
+        display: flex
+
+        .date
+          display: inline-block
+          flex: 1 1 0
+          border-left: 1px #BBBBBB solid
+          border-top: 1px #BBBBBB solid
+
+          p
+            margin: 0
+            padding: 0.2rem 0.4rem
+
+        .date:last-child
+          border-right: 1px #BBBBBB solid
+
+        .sunday
+          background-color: #FFEEEE
+
+        .saturday
+          background-color: #EEEEFF
+
+      .week:last-child
+        border-bottom: 1px #BBBBBB solid
+
 .calendar-month
   .switcher
     width: 90%
@@ -67,3 +95,12 @@ body
   .calendar
     width: 90%
     margin-left: 5%
+
+.error
+  margin-top: 3rem
+  text-align: center
+  font-size: 16px
+  padding: 1rem
+  background-color: #FFEEEE
+  color: #FF0000
+

@@ -1,5 +1,6 @@
 import { Component} from "inferno";
-import { WeekStartDate, WeekStartDateChangedCallback } from "./calendar_container";
+import { WeekStartDate } from "../common_types";
+import { WeekStartDateChangedCallback } from "./calendar_container";
 
 interface ISwitcherProps {
   weekStartDate: string,

@@ -1,22 +1,18 @@
 import { Component } from "inferno";
+import { CalendarInfo } from "../common_types";
 import CalendarHeader from "./calendar_header"
+import CalendarBody from "./calendar_body";
 
-type CalendarProps = {
-  year: number,
-  month: number,
-  weekStartDate: string,
-  viewType: string,
-}
-
-export default class Calendar extends Component<CalendarProps> {
-  constructor(props: CalendarProps) {
+export default class Calendar extends Component<CalendarInfo> {
+  constructor(props: CalendarInfo) {
     super(props);
   }
 
-  render(props: CalendarProps) {
+  render(props: CalendarInfo) {
     return (
       <div className="calendar">
         <CalendarHeader weekStartDate={props.weekStartDate}/>
+        <CalendarBody {...props} />
       </div>
     )
   }

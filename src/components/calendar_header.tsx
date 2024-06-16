@@ -1,5 +1,5 @@
 import { Component } from "inferno";
-import { WeekStartDate } from "./calendar_container";
+import { WeekStartDate } from "../common_types";
 
 type CalendarHeaderProps = {
   weekStartDate: string

@@ -1,5 +1,5 @@
 import { Component } from "inferno";
-import { ViewType } from "./calendar_container";
+import { ViewType } from "../common_types";
 
 type NavigatorProps = {
   year: number,
@@ -13,25 +13,54 @@ export default class Navigator extends Component<NavigatorProps> {
   }
 
   render(props: NavigatorProps) {
-    let prev_label: string = '';
-    let curr_label: string = '';
-    let next_label: string = '';
-
-    if (props.viewType === ViewType.Month) {
-      prev_label = '前の月';
-      curr_label = '年間カレンダー';
-      next_label = '次の月';
-    } else if (props.viewType === ViewType.Year) {
-      prev_label = '前の年';
-      next_label = '次の年';
-    }
-
     return (
       <div className="navigator">
-        <div className="prev">{ prev_label }</div>
-        <div className="curr">{ curr_label }</div>
-        <div className="next">{ next_label }</div>
+        <div className="prev">{this.previousLink(props.year, props.month, props.viewType)}</div>
+        <div className="curr"></div>
+        <div className="next">{this.nextLink(props.year, props.month, props.viewType)}</div>
       </div>
     );
+  }
+
+  previousLink(year:number, month:number, view_type:string) {
+    if (view_type === ViewType.Month) {
+      month--;
+      if (month < 1) {
+        year--;
+        month += 12;
+      }
+
+      if (year >= 2015) {
+        const link = `#/${year}/${month}`;
+        return <a id='navi-prev' href={link}>&lt;&lt;前の月</a>;
+      }
+    } else if (view_type === ViewType.Year) {
+      year--;
+      if (year >= 2015) {
+        const link = `#/${year}`;
+        return <a id='navi-prev' href={link}>&lt;&lt;前の年</a>;
+      }
+    }
+  }
+
+  nextLink(year:number, month:number, view_type:string) {
+    if (view_type === ViewType.Month) {
+      month++;
+      if (month > 12) {
+        year++;
+        month -= 12;
+      }
+
+      if (year <= 2034) {
+        const link = `#/${year}/${month}`;
+        return <a id='navi-next' href={link}>次の月&gt;&gt;</a>;
+      }
+    } else if (view_type === ViewType.Year) {
+      year++;
+      if (year <= 2034) {
+        const link = `#/${year}`;
+        return <a id='navi-next' href={link}>次の年&gt;&gt;</a>;
+      }
+    }
   }
 }
