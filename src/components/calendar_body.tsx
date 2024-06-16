@@ -70,8 +70,8 @@ export default class CalendarBody extends Component<CalendarInfo> {
      */
     if (props.month === 2) {
       // ３月１日の前日が２月の末日
-      const march1 = new Date(props.year, 3, 1);
-      const february_last_date = new Date((march1.getTime() / 1000) - 86400);
+      const march1 = new Date(props.year, 2, 1);
+      const february_last_date = new Date(march1.getTime() - 86400000); // getTimeはミリ秒
 
       this.date_count = february_last_date.getDate();
     } else {
