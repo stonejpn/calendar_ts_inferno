@@ -1,7 +1,7 @@
 import { Component } from "inferno";
 import { CalendarInfo, WeekStartDate } from "../common_types";
 import DateElement from "../utils/date_element"
-import Holidays from "../holidays";
+import * as holidays_json from "../holidays.json";
 
 const DayCountList = [
   0,
@@ -10,13 +10,18 @@ const DayCountList = [
   30, 31, 30, 31 /* ９、１０、１１，１２月 */
 ];
 
+type Holidays = { [year: string]: { [date: string]: string } };
+
 export default class CalendarBody extends Component<CalendarInfo> {
   start_day_of_week: number|null = null;
   date_count: number|null = null;
   matrix: DateElement[] = [];
+  holidays: Holidays;
 
   constructor(props:CalendarInfo) {
     super(props);
+
+    this.holidays = holidays_json as Holidays;
   }
 
   componentWillMount() {
@@ -91,7 +96,7 @@ export default class CalendarBody extends Component<CalendarInfo> {
     const filler_count = (props.weekStartDate === WeekStartDate.Sunday)
       ? this.start_day_of_week : (this.start_day_of_week + 6) % 7;
 
-    const holiday_in_year = Holidays[props.year];
+    const holiday_in_year = this.holidays[props.year];
     const month_str = `0${props.month}`.slice(-2);
     this.matrix = [];
     for (let i = 0; i < filler_count; i++) {
