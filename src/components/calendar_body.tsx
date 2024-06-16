@@ -1,13 +1,14 @@
 import { Component } from "inferno";
 import { CalendarInfo, WeekStartDate } from "../common_types";
 import DateElement from "../utils/date_element"
+import Holidays from "../holidays";
 
 const DayCountList = [
   0,
   31, 0, 31, 30, /* １，２，３，４月 */
   31, 30, 31, 31, /* ５，６，７，８月 */
   30, 31, 30, 31 /* ９、１０、１１，１２月 */
-]
+];
 
 export default class CalendarBody extends Component<CalendarInfo> {
   start_day_of_week: number|null = null;
@@ -44,6 +45,9 @@ export default class CalendarBody extends Component<CalendarInfo> {
                     class_name += ' sunday';
                   } else if (element.day_of_week === 6) {
                     class_name += ' saturday';
+                  }
+                  if (element.holiday !== null) {
+                    class_name += ' holiday';
                   }
                   return (
                     <div className={class_name} key={element.id}>
@@ -87,13 +91,17 @@ export default class CalendarBody extends Component<CalendarInfo> {
     const filler_count = (props.weekStartDate === WeekStartDate.Sunday)
       ? this.start_day_of_week : (this.start_day_of_week + 6) % 7;
 
+    const holiday_in_year = Holidays[props.year];
+    const month_str = `0${props.month}`.slice(-2);
     this.matrix = [];
     for (let i = 0; i < filler_count; i++) {
       this.matrix.push(new DateElement(id, null, null, null));
       id++;
     }
     for (let date = 1; date <= this.date_count; date++) {
-      this.matrix.push(new DateElement(id, date, (this.start_day_of_week + date - 1) % 7, null));
+      const date_str = month_str + `0${date}`.slice(-2);
+      const holiday = holiday_in_year[date_str] !== undefined ? holiday_in_year[date_str] : null;
+      this.matrix.push(new DateElement(id, date, (this.start_day_of_week + date - 1) % 7, holiday));
       id++;
     }
     while ((this.matrix.length) % 7) {

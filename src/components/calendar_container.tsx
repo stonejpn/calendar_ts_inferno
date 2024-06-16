@@ -101,8 +101,6 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
 
   // @ts-expect-error TS6133: 'props' is declared but its value is never read.
   render(props: CalendarAppProps, state: CalendarContainerState) {
-    console.log(`CalendarApp#render: year:${state.year} month:${state.month}`);
-
     if (state.error != null) {
       return (
         <div className="error">{ state.error.message }</div>
