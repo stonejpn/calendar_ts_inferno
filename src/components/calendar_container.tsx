@@ -3,6 +3,7 @@ import { WeekStartDate, ViewType, CalendarInfo } from "../common_types";
 import Navigator from "./navigator";
 import Switcher from './switcher';
 import Calendar from "./calendar";
+import CurrentMonth from "./CurrentMonth";
 
 type CalendarAppProps = {
   location: Location
@@ -122,6 +123,7 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
     return (
       <div className={view_type_class}>
         <h1 className="title">{title}</h1>
+        <CurrentMonth year={state.year} month={state.month} viewType={state.viewType} />
         <Navigator
           year={state.year}
           month={state.month}
