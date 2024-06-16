@@ -16,7 +16,7 @@ export default class Navigator extends Component<NavigatorProps> {
     return (
       <div className="navigator">
         <div className="prev">{this.previousLink(props.year, props.month, props.viewType)}</div>
-        <div className="curr"></div>
+        <div className="curr">{this.currLink(props.year, props.month, props.viewType)}</div>
         <div className="next">{this.nextLink(props.year, props.month, props.viewType)}</div>
       </div>
     );
@@ -40,6 +40,13 @@ export default class Navigator extends Component<NavigatorProps> {
         const link = `#/${year}`;
         return <a id='navi-prev' href={link}>&lt;&lt;前の年</a>;
       }
+    }
+  }
+
+  // @ts-expect-error TS6133: 'month' is declared but its value is never read.
+  currLink(year:number, month:number, view_type:string) {
+    if (view_type === ViewType.Month) {
+      return <a id='navi-curr' href={`#/${year}`}>年間カレンダー</a>
     }
   }
 

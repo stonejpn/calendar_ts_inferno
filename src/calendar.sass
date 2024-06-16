@@ -27,8 +27,6 @@ body
       text-align: right
 
   .switcher
-    text-align: left
-
     label
       display: inline-block
 
@@ -97,12 +95,44 @@ body
 
 .calendar-month
   .switcher
+    text-align: left
     width: 90%
     margin-left: 5%
 
   .calendar
     width: 90%
     margin-left: 5%
+
+.calendar-year
+  .switcher
+
+  .calendar
+    min-width: 960px
+
+    .calendar-row
+      display: flex
+      margin-bottom: 2rem
+
+      .month-wrapper
+        display: inline-block
+        flex: 1 1 0
+        margin-right: 2rem
+
+        .month-label
+          text-align: center
+          margin-bottom: 0.2rem
+
+        .calendar-body
+          .week
+            .date
+              p.holiday
+                display: none
+
+      .month-wrapper:last-child
+        margin-right: 0
+
+    .calendar-row:last-child
+      margin-bottom: 0
 
 .error
   margin-top: 3rem

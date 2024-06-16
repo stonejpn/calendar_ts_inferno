@@ -114,9 +114,14 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
       view_type_class += ' calendar-year'
     }
 
+    let title = `${state.year}年`;
+    if (state.viewType === ViewType.Month) {
+      title += ` ${state.month}月`;
+    }
+
     return (
       <div className={view_type_class}>
-        <h1 className="title">{state.year}年 {state.month}月</h1>
+        <h1 className="title">{title}</h1>
         <Navigator
           year={state.year}
           month={state.month}
