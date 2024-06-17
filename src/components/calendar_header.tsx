@@ -5,40 +5,39 @@ type CalendarHeaderProps = {
   weekStartDate: string
 }
 
+type DayOfWeek = {
+  label: string,
+  class_name: string
+}
+
+const DayOfWeeks:DayOfWeek[] = [
+  {label: '日', class_name: 'sunday'},
+  {label: '月', class_name: ''},
+  {label: '火', class_name: ''},
+  {label: '水', class_name: ''},
+  {label: '木', class_name: ''},
+  {label: '金', class_name: ''},
+  {label: '土', class_name: 'saturday'},
+]
+
 export default class CalendarHeader extends Component<CalendarHeaderProps> {
   constructor(props: CalendarHeaderProps) {
     super(props);
   }
 
   render(props: CalendarHeaderProps) {
-    const day_of_weeks :string[] = ['月', '火', '水', '木', '金', '土'];
+    const day_of_weeks = JSON.parse(JSON.stringify(DayOfWeeks)); // 一度JSONを経由させて、ディープコピーにする
 
-    switch (props.weekStartDate) {
-      case WeekStartDate.Sunday:
-        day_of_weeks.unshift('日');
-        break;
-      case WeekStartDate.Monday:
-        day_of_weeks.push('日');
-        break;
+    if (props.weekStartDate === WeekStartDate.Monday) {
+      const sunday: DayOfWeek = day_of_weeks.shift();
+      day_of_weeks.push(sunday);
     }
     return (
       <div className="header">
         {
-          (() => {
-            const headers = [];
-            for (const value of day_of_weeks) {
-              let class_name = '';
-              if (value === '日') {
-                class_name = 'sunday';
-              } else if (value === '土') {
-                class_name = 'saturday';
-              }
-
-              headers.push(<div className={class_name}>{value}</div>)
-
-            }
-              return headers;
-          })()
+          day_of_weeks.map((day: DayOfWeek, index: number) => {
+            return <div className={day.class_name} key={index}>{day.label}</div>;
+          })
         }
       </div>
     )
