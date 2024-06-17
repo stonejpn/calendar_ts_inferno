@@ -10,7 +10,7 @@ type DayOfWeek = {
   class_name: string
 }
 
-const DayOfWeeks:DayOfWeek[] = [
+const DayOfWeeks: DayOfWeek[] = [
   {label: '日', class_name: 'sunday'},
   {label: '月', class_name: ''},
   {label: '火', class_name: ''},
@@ -26,7 +26,7 @@ export default class CalendarHeader extends Component<CalendarHeaderProps> {
   }
 
   render(props: CalendarHeaderProps) {
-    const day_of_weeks = JSON.parse(JSON.stringify(DayOfWeeks)); // 一度JSONを経由させて、ディープコピーにする
+    const day_of_weeks = JSON.parse(JSON.stringify(DayOfWeeks)); // 一度JSONを経由させて、ディープコピーする
 
     if (props.weekStartDate === WeekStartDate.Monday) {
       const sunday: DayOfWeek = day_of_weeks.shift();

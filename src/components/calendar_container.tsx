@@ -3,11 +3,10 @@ import { WeekStartDate, ViewType, CalendarInfo } from "../common_types";
 import Navigator from "./navigator";
 import Switcher from './switcher';
 import Calendar from "./calendar";
-import CurrentMonth from "./CurrentMonth";
+import CurrentMonth from "./current_month";
 
 type CalendarAppProps = {
-  location: Location
-  history: History
+  hash: string
 }
 
 interface CalendarContainerState extends CalendarInfo {
@@ -38,8 +37,8 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
   componentDidMount() {
     // constructorの時点で、parseHashしても画面は変わらない
     // didMountのタイミングで、ハッシュを調べる
-    if (this.props.location.hash !== '') {
-      this.parseHash(this.props.location.hash);
+    if (this.props.hash !== '') {
+      this.parseHash(this.props.hash);
     }
 
     window.addEventListener('hashchange', this.hashChanged.bind(this));
@@ -49,16 +48,16 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
     window.removeEventListener('hashchange', this.hashChanged.bind(this));
   }
 
-  weekStartDateChanged(weekStartDate :string) {
+  weekStartDateChanged(weekStartDate: string) {
     this.setState({weekStartDate});
   }
 
-  hashChanged(event:HashChangeEvent) {
+  hashChanged(event: HashChangeEvent) {
     const url = new URL(event.newURL);
     this.parseHash(url.hash);
   }
 
-  parseHash(hash:string) {
+  parseHash(hash: string) {
     const [, year_str, month_str,] = hash.split('/');
 
     if (year_str === undefined) {
@@ -104,7 +103,7 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
   render(props: CalendarAppProps, state: CalendarContainerState) {
     if (state.error != null) {
       return (
-        <div className="error">{ state.error.message }</div>
+        <div className="error">{state.error.message}</div>
       )
     }
 
@@ -128,7 +127,6 @@ export default class CalendarContainer extends Component<CalendarAppProps> {
           year={state.year}
           month={state.month}
           viewType={state.viewType}
-          //changeCalendarCallback={this.hashChanged.bind(this)}
         />
         <Switcher
           weekStartDate={state.weekStartDate}

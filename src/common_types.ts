@@ -15,7 +15,7 @@ export const ViewType = {
 } as const;
 
 /**
- *
+ * カレンダー共通データ
  */
 export type CalendarInfo = {
   year: number,

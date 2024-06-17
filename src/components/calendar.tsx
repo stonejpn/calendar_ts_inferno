@@ -1,5 +1,5 @@
 import { Component } from "inferno";
-import {CalendarInfo, ViewType} from "../common_types";
+import { CalendarInfo, ViewType } from "../common_types";
 import CalendarHeader from "./calendar_header"
 import CalendarBody from "./calendar_body";
 
@@ -17,7 +17,8 @@ export default class Calendar extends Component<CalendarInfo> {
         </div>
       )
     } else if (props.viewType === ViewType.Year) {
-      const row_list = [
+      // 年間カレンダーは、３ヶ月ごとに並べる
+      const month_list = [
         [1, 2, 3],
         [4, 5, 6],
         [7, 8, 9],
@@ -26,18 +27,17 @@ export default class Calendar extends Component<CalendarInfo> {
       return (
         <div className="calendar">
           {
-            row_list.map((month_list:number[], i:number) => {
+            month_list.map((row_list:number[], i:number) => {
               return (
                 <div className="calendar-row" key={i}>
                   {
-                    month_list.map((month) => {
+                    row_list.map((month) => {
                       return (
                         <div className="month-wrapper" key={month}>
                           <div className="month-label"><a href={`#/${props.year}/${month}`}>{month}月</a></div>
-                          <CalendarBody year={props.year} month={month} weekStartDate={props.weekStartDate}
-                                        viewType={props.viewType}/>
+                          <CalendarBody {...props} />
                         </div>
-                      )
+                      );
                     })
                   }
                 </div>
